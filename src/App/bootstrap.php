@@ -1,5 +1,6 @@
 <?php
-# load diles and confs
+
+# load files and confs
 
 declare(strict_types=1);
 
