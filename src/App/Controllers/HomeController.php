@@ -11,8 +11,6 @@ class HomeController{
     public function __construct()
     {
         $this->view = new TemplateEngine(Paths::VIEW);
-        $d['text'] = "ahoy!";
-        $this->view->assign('data', $d);
     }
     public function home()
     {
