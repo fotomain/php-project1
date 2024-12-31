@@ -17,7 +17,8 @@ class HomeController{
 //        dd($this->view);
 //        echo 'Home Page';
 
-        $this->view->render("/index.php",[
+        //buffer4 => echo
+        echo $this->view->render("/index.php",[
             'title' => 'Title Parameter1',
         ]);
     }

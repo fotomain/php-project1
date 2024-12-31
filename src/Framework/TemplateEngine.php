@@ -18,8 +18,17 @@ class TemplateEngine
     public function render(string $template, $dataParams=[])
     {
         if(0!==count($dataParams)) $this->data=$dataParams;
-        extract($this->data,EXTR_SKIP);
+
+        //buffer1
+        ob_start();
+
         include "{$this->basePath}/{$template}";
+
+        //buffer2
+        $output = ob_get_clean();
+        ob_end_clean();
+        //buffer3
+        return $output;
     }
 }
 
