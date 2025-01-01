@@ -22,7 +22,8 @@ class TemplateEngine
         //buffer1
         ob_start();
 
-        include "{$this->basePath}/{$template}";
+//        include "{$this->basePath}/{$template}";
+        $this->resolve($template);
 
         //buffer2
         $output = ob_get_clean();
@@ -30,6 +31,12 @@ class TemplateEngine
         //buffer3
         return $output;
     }
+
+    public function resolve(string $path)
+    {
+        return include "{$this->basePath}/{$path}";
+    }
+
 }
 
 

@@ -41,6 +41,7 @@ class Router{
             }
 
 //            echo "route found";
+//            dd($route);
             [$class,$function]=$route['controller'];
 
             $controllerInstance = new $class;
