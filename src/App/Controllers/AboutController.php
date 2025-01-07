@@ -19,8 +19,9 @@ class AboutController{
 //        echo 'About Page';
 
         //buffer4 => echo
-        echo $this->view->render("/about.php",[
+        echo $this->view->render("about.php", array(
             'title' => 'About Title Text!',
-        ]);
+            'dangerousData' => '<script> alert(123)  </script>  '
+        ));
     }
 }

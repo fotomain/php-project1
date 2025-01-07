@@ -7,13 +7,12 @@ declare(strict_types=1);
 include __DIR__ . '/../../vendor/autoload.php';
 
 use Framework\App;
-use App\Controllers\AboutController;
-use App\Controllers\HomeController;
-
+use function App\Config\registerRoutes;
 $app = new App();
+
+registerRoutes($app);
+
 //$app->get('/',['App\Controllers\HomeController','home']);
-$app->get('/',[HomeController::class,'home']);
-$app->get('/about',[AboutController::class,'about']);
 
 //dd($app);
 

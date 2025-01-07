@@ -7,7 +7,8 @@ namespace Framework;
 class TemplateEngine
 {
 //    private string $basePath;
-    public array $data = ["title"=>"no titile #1"];
+    public array $data = array ("title"=>"no titile #1");
+    public $title='';
 //    function assign($key, $val) {
 //        $this->data[$key] = $val;
 //    }
@@ -15,8 +16,11 @@ class TemplateEngine
     {
 //        $this->basePath = $basePath;
     }
-    public function render(string $template, $dataParams=[])
+    public function render(string $template, $dataParams)
     {
+        $this->title = $dataParams->title;
+//        extract($dataParams, EXTR_OVERWRITE );
+
         if(0!==count($dataParams)) $this->data=$dataParams;
 
         //buffer1
