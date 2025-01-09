@@ -11,9 +11,11 @@
     <hr />
 
     <!-- Escaping Data -->
-    <p> <?php echo $this->title ?></p>
-    <p> <?php echo e($this->data['title']) ?></p>
-    <p>Escaping Data: <?php echo e($this->data['dangerousData']) ?></p>
+
+    <p> === local  title === <?php echo $this->title ?></p>
+    <p> === global title === <?php echo escapeData($this->data['title']) ?></p>
+
+    <p>Escaping Data: <?php echo escapeData($this->data['dangerousData']) ?></p>
 </section>
 <!-- End Main Content Area -->
 

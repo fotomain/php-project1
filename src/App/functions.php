@@ -10,7 +10,15 @@ function dd (mixed $value)
     die();
 }
 
-function e (mixed $value) :string
+function escapeData (mixed $value) :string
 {
-    return htmlspecialchars($value);
+//    echo   "=== escapeData";
+//    $ret = htmlspecialchars($value);
+//    echo   $value;
+//    echo   $ret;
+//    return $ret;
+//    exit(0);
+
+    $ret = htmlspecialchars($value);
+    return $ret;
 }
