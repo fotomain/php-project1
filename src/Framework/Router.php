@@ -19,6 +19,7 @@ class Router{
     }
 
     private function normalizePath(string $path):string{
+        $path=str_replace('.php','',$path);
         $path=trim($path,'/');
         $path="/{$path}/";
         $path=preg_replace('#[/]{2,}#','/',$path);
@@ -38,11 +39,19 @@ class Router{
                 ||
                 $method!==$route['method']
             ){
+//                echo "route NOT found {$path}";
+//                echo "route        in {$route['path']}";
+//                echo "<br>";
+//                echo "====================== 1";
+//                echo "<br>";
+//                echo json_encode($route);
                 continue;
             }
 
 //            echo "route found";
 //            dd($route);
+//            exit(0);
+
             [$class,$function]=$route['controller'];
 
 //version1          $controllerInstance = new $class;
@@ -56,7 +65,10 @@ class Router{
                         $action = fn() => $controllerInstance->{$function}();
                         //=== prepare stack of function calls
                         foreach ($this->middlewares as $middleware) {
-                            $middlewareInstance = new $middleware;
+                            //version1 $middlewareInstance = new $middleware;
+                            $middlewareInstance = $container?
+                                $container->resolve($middleware)
+                                :new $middleware;
                             $action = fn() => $middlewareInstance->process($action);
                         }
 

@@ -6,8 +6,9 @@ namespace Framework;
 
 class TemplateEngine
 {
+    private array $globalTemplateData=[];
 //    private string $basePath;
-    public array $data = array ("title"=>"no titile #1");
+    public array $data = array ("title"=>"no title #1");
     public $title='';
 //    function assign($key, $val) {
 //        $this->data[$key] = $val;
@@ -19,9 +20,11 @@ class TemplateEngine
     public function render(string $template, $dataParams)
     {
         $this->title = $dataParams->title;
-//        extract($dataParams, EXTR_OVERWRITE );
+        extract($dataParams, EXTR_OVERWRITE );
+        extract($this->globalTemplateData, EXTR_SKIP );
 
         if(0!==count($dataParams)) $this->data=$dataParams;
+        if(0!==count($this->globalTemplateData)) $this->data=$this->globalTemplateData;
 
         //buffer1
         ob_start();
@@ -39,6 +42,11 @@ class TemplateEngine
     public function resolve(string $path)
     {
         return include "{$this->basePath}/{$path}";
+    }
+
+    public function addGlobalData(string $key, mixed $value)
+    {
+        $this->globalTemplateData[$key] = $value;
     }
 
 }
