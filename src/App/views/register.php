@@ -4,7 +4,9 @@
 <section
         class="max-w-2xl mx-auto mt-12 p-4 bg-white shadow-md border border-gray-200 rounded"
 >
-    <form class="grid grid-cols-1 gap-6">
+    <form class="grid grid-cols-1 gap-6"
+        method="POST"
+    >
         <!-- Email -->
         <label class="block">
             <span class="text-gray-700">Email address</span>
@@ -12,6 +14,7 @@
                     type="email"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     placeholder="john@example.com"
+                    name="email"
             />
         </label>
         <!-- Age -->
@@ -21,12 +24,14 @@
                     type="number"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     placeholder=""
+                    name="age"
             />
         </label>
         <!-- Country -->
         <label class="block">
             <span class="text-gray-700">Country</span>
             <select
+                    name="country"
                     class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             >
                 <option value="USA">USA</option>
@@ -39,6 +44,7 @@
         <label class="block">
             <span class="text-gray-700">Social Media URL</span>
             <input
+                    name="socialMediaURL"
                     type="text"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     placeholder=""
@@ -48,6 +54,7 @@
         <label class="block">
             <span class="text-gray-700">Password</span>
             <input
+                    name="password"
                     type="password"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     placeholder=""
@@ -57,6 +64,7 @@
         <label class="block">
             <span class="text-gray-700">Confirm Password</span>
             <input
+                    name="confirmPassword"
                     type="password"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     placeholder=""
@@ -68,6 +76,7 @@
                 <div>
                     <label class="inline-flex items-center">
                         <input
+                                name="tos"
                                 class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
                                 type="checkbox"
                         />

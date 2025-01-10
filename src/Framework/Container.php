@@ -37,6 +37,8 @@ class Container
             return new $className;
         }
 
+//        dd($params);
+
         $dependencies = [];
         foreach($params as $param) {
             $name = $param->getName();
@@ -48,9 +50,10 @@ class Container
             if(!$type instanceof ReflectionNamedType || $type->isBuiltin()) {
                 throw new ContainerException("Failed to resolve class because type no instanceof ReflectionNamedType  {$param->getName()}  ");
             }
-        }
 
-        $dependencies[] = $this->get($type->getName());
+            $dependencies[] = $this->get($type->getName());
+
+        }
 
 //        dd($dependencies);
 
