@@ -22,3 +22,12 @@ function escapeData (mixed $value) :string
     $ret = htmlspecialchars($value);
     return $ret;
 }
+
+function redirectTo (string $url)
+{
+    header("Location: $url");
+    http_response_code(302);
+    exit;
+}
+
+
