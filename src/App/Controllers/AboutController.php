@@ -8,6 +8,7 @@ use App\Config\Paths;
 class AboutController{
     //version1 private TemplateEngine $view;
 
+    //version1 $this->view = new TemplateEngine(Paths::VIEW);
 
     public array $pianoButtons=[
         '-3,10', '-3,11', '-3,12',
@@ -20,18 +21,29 @@ class AboutController{
          '4,1',  '4,2',  '4,3',  '4,4',  '4,5',  '4,6',  '4,7',  '4,8',  '4,9', '4,10', '4,11',  '4,12',
          '5,1'
     ];
+    public string $inputData="";
     public array $melody=[];
     public int $shiftNumber=-3;
     public array $outputData=[];
     public function __construct(private TemplateEngine $view)
     {
-        //version1 $this->view = new TemplateEngine(Paths::VIEW);
-        $this->melody=['2,1','2,6','2,1','2,8','2,1','2,9'];
+        $inputFileName = "./input_melody.txt";
+        $inputData = file_get_contents($inputFileName);
+        $inputData = str_replace("[[","",$inputData);
+        $inputData = str_replace("]]","",$inputData);
+        $this->inputData = $inputData;
+
+        $this->melody = explode('],[', $inputData);
+
+//        $this->melody=['2,1','2,6','2,1','2,8','2,1','2,9'];
+
         for ($i = 0; $i < count($this->melody) ; $i++) {
             $oldIndex=array_search($this->melody[$i],$this->pianoButtons);
                 $newIndex=$oldIndex + $this->shiftNumber;
                     $this->outputData[$i]=$this->pianoButtons[$newIndex];
         }
+
+        $writeData='';
 
     }
     public function about()
@@ -45,6 +57,7 @@ class AboutController{
             'title' => 'About Title Text!',
             'dangerousData' => '<script> alert(123)  </script>  ',
             'pianoButtonsCount' => count($this->pianoButtons),
+            'inputData' => $this->inputData,
             'melody' => $this->melody,
             'outputData' => $this->outputData,
         ));

@@ -12,6 +12,8 @@
 
     <hr />
 
+    <?php echo json_encode($this->data['inputData']); ?>
+    <hr />
     <?php echo json_encode($this->data['melody']); ?>
     <hr />
     <?php echo json_encode($this->data['outputData']); ?>
