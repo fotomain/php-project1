@@ -1,6 +1,8 @@
 
 <?php $this->resolve("partials/_header.php"); ?>
 
+
+
 <!-- Start Main Content Area -->
 <section
         class="container mx-auto mt-12 p-4 bg-white shadow-md border border-gray-200 rounded"
@@ -10,6 +12,12 @@
 
     <hr />
 
+    <?php echo json_encode($this->data['melody']); ?>
+    <hr />
+    <?php echo json_encode($this->data['outputData']); ?>
+    <hr />
+    <?php echo $this->data['pianoButtonsCount']; ?>
+    <hr />
     <!-- Escaping Data -->
 
     <p> === local  title === <?php echo $this->title ?></p>

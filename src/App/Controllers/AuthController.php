@@ -8,6 +8,8 @@ use App\Services\ValidatorService;
 class AuthController{
     //version1 private TemplateEngine $view;
 
+
+
     public function __construct(
         private TemplateEngine $view,
         private ValidatorService $validatorService
