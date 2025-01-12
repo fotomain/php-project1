@@ -18,6 +18,8 @@
     <hr />
     <?php echo json_encode($this->data['outputData']); ?>
     <hr />
+    <?php echo $this->data['writeData']; ?>
+    <hr />
     <?php echo $this->data['pianoButtonsCount']; ?>
     <hr />
     <!-- Escaping Data -->

@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use Framework\TemplateEngine;
 use App\Config\Paths;
+use http\Exception\RuntimeException;
+
 
 class AboutController{
     //version1 private TemplateEngine $view;
@@ -25,6 +27,7 @@ class AboutController{
     public array $melody=[];
     public int $shiftNumber=-3;
     public array $outputData=[];
+    public string $writeData="";
     public function __construct(private TemplateEngine $view)
     {
         $inputFileName = "./input_melody.txt";
@@ -40,10 +43,19 @@ class AboutController{
         for ($i = 0; $i < count($this->melody) ; $i++) {
             $oldIndex=array_search($this->melody[$i],$this->pianoButtons);
                 $newIndex=$oldIndex + $this->shiftNumber;
+                if($newIndex>88 || $newIndex<0){
+                    echo "not possible to transpose data ".$this->melody[$i]." with shiftNumber: ".$this->shiftNumber;
+                    exit(0);
+                }
                     $this->outputData[$i]=$this->pianoButtons[$newIndex];
         }
 
-        $writeData='';
+        $writeData=implode('],[',$this->outputData);
+        $writeData="[[".$writeData."]]";
+
+        $this->writeData = $writeData;
+
+        file_put_contents("output_melody.txt", $writeData);
 
     }
     public function about()
@@ -60,6 +72,7 @@ class AboutController{
             'inputData' => $this->inputData,
             'melody' => $this->melody,
             'outputData' => $this->outputData,
+            'writeData' => $this->writeData,
         ));
     }
 }
