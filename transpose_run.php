@@ -1,5 +1,6 @@
 <?php
 
+//=== RUN COMMAND
 //php -f transpose_run.php input_melody1.txt -3
 
 //$inputFileName = "./input_melody1.txt";
@@ -8,7 +9,7 @@ $inputFileName = $argv[1];
 $shiftNumber=(int)$argv[2];
 $outputData=[];
 
-
+//=== TOTAL 88
 $pianoButtons=[
    '-3,10', '-3,11', '-3,12',
    '-2,1', '-2,2', '-2,3', '-2,4', '-2,5', '-2,6', '-2,7', '-2,8', '-2,9','-2,10','-2,11', '-2,12',
@@ -20,25 +21,26 @@ $pianoButtons=[
     '4,1',  '4,2',  '4,3',  '4,4',  '4,5',  '4,6',  '4,7',  '4,8',  '4,9', '4,10', '4,11',  '4,12',
     '5,1'
 ];
+echo count($pianoButtons)."\n";
 
 echo '============== Starting transpose... '."\n";
 echo "\n";
-
 
 $inputData = file_get_contents($inputFileName);
 $inputData = str_replace("[[","",$inputData);
 $inputData = str_replace("]]","",$inputData);
 
-$melody = explode('],[', $inputData);
+$collectionOfNotes = explode('],[', $inputData);
 
-echo json_encode($melody);
+echo json_encode($collectionOfNotes);
 echo "\n";
 
-    for ($i = 0; $i < count($melody) ; $i++) {
-        $oldIndex=array_search($melody[$i],$pianoButtons);
+    for ($i = 0; $i < count($collectionOfNotes) ; $i++) {
+        $oldIndex=array_search($collectionOfNotes[$i],$pianoButtons);
         $newIndex=$oldIndex + $shiftNumber;
-        if($newIndex>88 || $newIndex<0){
-            echo "============== ERROR: it's not possible to transpose data ".$melody[$i]." with shiftNumber: ".$shiftNumber;
+        echo 'newIndex = '.$newIndex; echo "\n";
+        if($newIndex>87 || $newIndex<0){
+            echo "============== ERROR: it's not possible to transpose data ".$collectionOfNotes[$i]." with shiftNumber: ".$shiftNumber;
             exit(0);
         }
         $outputData[$i]=$pianoButtons[$newIndex];
