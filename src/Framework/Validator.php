@@ -15,7 +15,7 @@ class Validator
     {
         $this->rules[$alias]=$rule;
     }
-    public function validate(array $formData, array $fields)
+    public function validate(array $formData, array $fields) : void
     {
         $errors=[];
 //        dd($formData);
@@ -37,9 +37,10 @@ class Validator
         if(count($errors)>0) {
 
             $referer = $_SERVER['HTTP_REFERER'];
+            $_SESSION['errors']=$errors;
+            redirectTo($referer);
 
 //            redirectTo("/register");
-            redirectTo($referer);
 //
 //            echo "Ērrors";
 //            dd($errors);

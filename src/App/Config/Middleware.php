@@ -6,10 +6,12 @@ namespace App\Config;
 
 use Framework\App;
 use App\Middleware\TemplateDataMiddleware;
+use App\Middleware\SessionMiddleware;
 use App\Middleware\ValidationExceptionMiddleware;
 
 function registerMiddleware(App $app): void
 {
     $app->addMiddleware(TemplateDataMiddleware::class);
+    $app->addMiddleware(SessionMiddleware::class);
 //    $app->addMiddleware(ValidationExceptionMiddleware::class);
 }

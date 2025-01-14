@@ -3,6 +3,12 @@
 //=== RUN COMMAND
 //php -f transpose_run.php input_melody1.txt -3
 
+//=== TEST BORDERS COMMANDS
+//php -f transpose_run.php input_melody2.txt 88
+//php -f transpose_run.php input_melody2.txt 87
+//php -f transpose_run.php input_melody3.txt -88
+//php -f transpose_run.php input_melody3.txt -87
+
 //$inputFileName = "./input_melody1.txt";
 //$shiftNumber=-3;
 $inputFileName = $argv[1];
