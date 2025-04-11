@@ -29,6 +29,12 @@ class Router {
         $this->registerRoute("DELETE", $route, $controller);
     }
 
+    public function error($httpCode)
+    {
+        http_response_code($httpCode);
+        loadView("error/{$httpCode}");
+        exit;
+    }
     public function route($uri, $method){
         foreach($this->routes as $route){
             if($route["uri"] === $uri && $route["method"] === $method){
@@ -37,19 +43,7 @@ class Router {
             }
         }
 
-        http_response_code(404);
-        loadView("error/404");
-        exit;
-
+        $this->error();
     }
 }
 
-//global $uri;
-//$routesArray = require basePath('routes.php');
-//
-//if(array_key_exists($uri, $routesArray)){
-//    require basePath($routesArray[$uri]);
-//} else {
-//    http_response_code(404);
-//    require basePath($routesArray['404']);
-//}
