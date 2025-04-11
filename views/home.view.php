@@ -1,11 +1,8 @@
-<?php require 'partials/head.php'; ?>
 
-<?php require 'partials/navbar.php'; ?>
-
-<?php require 'partials/showcase-search.php'; ?>
-
-<?php require 'partials/top-banner.php'; ?>
-
+<?php loadPartial('head'); ?>
+<?php loadPartial('navbar'); ?>
+<?php loadPartial('showcase-search'); ?>
+<?php loadPartial('top-banner'); ?>
 
 
 <!-- Job Listings -->
@@ -198,8 +195,6 @@
         </a>
 </section>
 
+<?php loadPartial('bottom-banner'); ?>
+<?php loadPartial('footer'); ?>
 
-
-<?php require 'partials/bottom-banner.php'; ?>
-
-<?php require 'partials/footer.php'; ?>

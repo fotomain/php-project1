@@ -9,3 +9,7 @@ function loadView($name='')
 {
     require basePath("views/{$name}.view.php");
 }
+function loadPartial($name='')
+{
+    require basePath("views/partials/{$name}.php");
+}
