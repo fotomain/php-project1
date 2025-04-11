@@ -1,3 +1,3 @@
 <?php
 
-echo 'Listing create';
+loadView("listings/create");

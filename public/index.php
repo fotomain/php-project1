@@ -16,6 +16,8 @@ $routesArray = [
 
 $uri = $_SERVER['REQUEST_URI'];
 
+echo $uri;
+
 if(array_key_exists($uri, $routesArray)){
     require basePath($routesArray[$uri]);
 } else {
