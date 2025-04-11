@@ -7,8 +7,19 @@ require '../helpers.php';
 
 //loadView('home');
 
+
+require basePath('Router.php');
+
+$router = new Router();
+
+$routes = require basePath('routes.php');
+
+//echo json_encode($routes);
+
 $uri = $_SERVER['REQUEST_URI'];
+$method = $_SERVER['REQUEST_METHOD'];
 
-require basePath('router.php');
+//inspect($uri);
+//inspect($method);
 
-
+$router->route($uri, $method);
