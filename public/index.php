@@ -5,9 +5,9 @@
 
 require '../helpers.php';
 
-require basePath('views/home.view.php');
+loadView('home');
 
-echo "Hello World!";
+//echo "Hello World!";
 
 
 
