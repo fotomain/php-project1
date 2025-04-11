@@ -1,16 +1,13 @@
-
-<!-- https://localhost/phpiggy/public/  -->
-
 <?php
 
-include __DIR__."/../src/App/functions.php";
+//php -S localhost:8000
+//php -S localhost:8000 -t public
 
-ini_set("memory_limit", "255M");
-//echo ini_get("memory_limit");
+require '../helpers.php';
 
-$app = include __DIR__.'/../src/App/bootstrap.php';
+require basePath('views/home.view.php');
 
-$app->run();
+echo "Hello World!";
 
 
 
