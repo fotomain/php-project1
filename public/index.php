@@ -4,11 +4,8 @@
 //php -S localhost:8000 -t public
 
 require '../helpers.php';
-
-//loadView('home');
-
-
 require basePath('Router.php');
+require basePath('Database.php');
 
 $router = new Router();
 
