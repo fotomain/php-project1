@@ -1,6 +1,5 @@
 <?php loadPartial('head'); ?>
 <?php loadPartial('navbar'); ?>
-
 <?php loadPartial('top-banner'); ?>
 
 
