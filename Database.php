@@ -19,9 +19,14 @@ class Database
         }
     }
 
-    public function query($query){
+    public function query($query,$params = []){
         try {
             $stmt = $this->conn->prepare($query);
+
+            foreach($params as $param=>$value){
+                $stmt->bindParam($param,$value);
+            }
+
             $stmt->execute();
             return $stmt;
         } catch (PDOException $e){

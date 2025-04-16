@@ -13,7 +13,8 @@ $routes = require basePath('routes.php');
 
 //echo json_encode($routes);
 
-$uri = $_SERVER['REQUEST_URI'];
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
 $method = $_SERVER['REQUEST_METHOD'];
 
 //inspect($uri);
