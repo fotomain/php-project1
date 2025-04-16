@@ -29,7 +29,7 @@ class Router {
         $this->registerRoute("DELETE", $route, $controller);
     }
 
-    public function error($httpCode=404,$uri)
+    public function error($httpCode=404,$uri='')
     {
         http_response_code($httpCode);
 //        echo $uri;
@@ -39,7 +39,7 @@ class Router {
     public function route($uri, $method){
         foreach($this->routes as $route){
             if($route["uri"] === $uri && $route["method"] === $method){
-                require basePath($route["controller"]);
+                require basePath('App/' . $route["controller"]);
                 return;
             }
         }

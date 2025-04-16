@@ -4,9 +4,9 @@
 //php -S localhost:8000 -t public
 
 require '../helpers.php';
-require basePath('Router.php');
-require basePath('Database.php');
-require basePath('Models/ModelJob.php');
+require basePath('Framework/Router.php');
+require basePath('Framework/Database.php');
+require basePath('App/models/ModelJob.php');
 
 global $modelJob;
 $modelJob = new ModelJobClass();
