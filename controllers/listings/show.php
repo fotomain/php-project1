@@ -15,7 +15,11 @@ $listing = $db->query(
 
 //inspect($listing);
 
-global $showData;
-$showData = $listing[0];
+global $modelJob;
+$modelJob->setCurrentJob($listing[0]);
+
+//global $showData;
+//$showData = $listing[0];
+
 
 loadView('listings/show');

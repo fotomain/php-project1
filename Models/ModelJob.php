@@ -7,7 +7,7 @@ class ModelJobClass {
 
     public function __construct($jobList=null,$currentJob=null)
     {
-        echo 'ModelJobState';
+//        echo 'ModelJobState';
         $this->currentJob = $currentJob;
         $this->jobList = $jobList;
     }
@@ -21,6 +21,7 @@ class ModelJobClass {
         $this->currentJob = $currentJob;
     }
     public function getCurrentJob(){
+//        echo 'getCurrentJob';
         return $this->currentJob;
     }
 

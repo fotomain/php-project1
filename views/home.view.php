@@ -14,9 +14,9 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
 
             <!-- Job Listing 2: -->
-           <?php global $modelJob; $listingsArray=$modelJob->getJobList(); ?>
+           <?php global $modelJob; ?>
 
-           <?php foreach($listingsArray as $listing) : ?>
+           <?php foreach($modelJob->getJobList() as $listing) : ?>
 
             <div class="rounded-lg shadow-md bg-white">
                 <div class="p-4">

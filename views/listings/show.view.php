@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="p-4">
-            <?php global $showData?>
+            <?php global $modelJob; $showData=$modelJob->getCurrentJob()?>
             <h2 class="text-xl font-semibold"><?= $showData->title ?></h2>
             <p class="text-gray-700 text-lg mt-2">
                 <?= $showData->description ?>
