@@ -9,9 +9,9 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
 
             <!-- Job Listing 1: -->
-            <?php global $jobArray ?>
+            <?php global $modelJob; ?>
 
-            <?php foreach($jobArray as $listing) : ?>
+            <?php foreach($modelJob->getJobList() as $listing) : ?>
 
                 <div class="rounded-lg shadow-md bg-white">
                     <div class="p-4">

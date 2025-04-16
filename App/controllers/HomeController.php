@@ -2,14 +2,25 @@
 
 namespace App\Controllers;
 
+use Framework\Database;
+
 class HomeController {
+    protected $db;
     public function __construct()
     {
-//        die('HomeController');
+        $config = require basePath('/config/db.php');
+        $this->db = new Database($config);
     }
 
     public function index() {
-        die('HomeController index');
+
+        $listings=$this->db->query('SELECT * FROM listings1 LIMIT 3')->fetchAll();
+
+        global $modelJob;
+        $modelJob->setJobList($listings);
+
+        loadView("home");
+
     }
 
 }
