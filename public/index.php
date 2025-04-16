@@ -4,8 +4,10 @@
 //php -S localhost:8000 -t public
 
 
-use App\ModelJobClass;
+
 use Framework\Router;
+use Model\ModelJobClass;
+
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -14,19 +16,19 @@ require '../helpers.php';
 //require basePath('Framework/Database.php');
 require basePath('App/models/ModelJob.php');
 
-spl_autoload_register(function ($class) {
-    $path = basePath('Framework/' . $class . '.php'  );
-    if (file_exists($path)) {
-        require $path;
-    }
-});
+//spl_autoload_register(function ($class) {
+//    $path = basePath('Framework/' . $class . '.php'  );
+//    if (file_exists($path)) {
+//        require $path;
+//    }
+//});
 
-spl_autoload_register(function ($class) {
-   $path = basePath('App/models/' . $class . '.php'  );
-   if (file_exists($path)) {
-       require $path;
-   }
-});
+//spl_autoload_register(function ($class) {
+//   $path = basePath('App/models/' . $class . '.php'  );
+//   if (file_exists($path)) {
+//       require $path;
+//   }
+//});
 
 global $modelJob;
 $modelJob = new ModelJobClass();
