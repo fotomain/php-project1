@@ -4,7 +4,18 @@ namespace Framework;
 class Router {
     protected $routes = [];
 
-    public function registerRoute($method,$uri,$controller)
+    public function registerRoute($method,$uri,$action)
+    {
+        list($controller,$controllerMethod) = explode('@',$action);
+        $this->routes[] = [
+            "method" => $method,
+            "uri" => $uri,
+            "controller" => $controller,
+            "controllerMethod" => $controllerMethod,
+        ];
+    }
+
+    public function registerRoute000($method,$uri,$controller)
     {
         $this->routes[] = [
             "method" => $method,
@@ -37,7 +48,8 @@ class Router {
         loadView("error/{$httpCode}",[]);
         exit;
     }
-    public function route($uri, $method){
+
+    public function route000($uri, $method){
         foreach($this->routes as $route){
             if($route["uri"] === $uri && $route["method"] === $method){
                 require basePath('App/' . $route["controller"]);
@@ -47,5 +59,26 @@ class Router {
 
         $this->error(404,$uri);
     }
+    public function route($uri, $method){
+        foreach($this->routes as $route){
+            if($route["uri"] === $uri && $route["method"] === $method){
+
+                $controller = 'App\\Controllers\\' . $route["controller"];
+                $controllerMethod = $route["controllerMethod"];
+                //=== class + call method
+                $controllerInstance = new $controller();
+                $controllerInstance->$controllerMethod();
+
+                // $listing = new ListingController();
+                // $listing->index();
+
+                return;
+            }
+        }
+
+        $this->error(404,$uri);
+    }
+
+
 }
 
