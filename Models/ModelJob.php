@@ -20,5 +20,8 @@ class ModelJobClass {
     public function setCurrentJob($currentJob){
         $this->currentJob = $currentJob;
     }
+    public function getCurrentJob(){
+        return $this->currentJob;
+    }
 
 }
