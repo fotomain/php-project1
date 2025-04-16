@@ -13,8 +13,7 @@
         <div class="text-center text-3xl mb-4 font-bold border border-gray-300 p-3">Recent Jobs</div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
 
-
-            <!-- Job Listing 1: -->
+            <!-- Job Listing 2: -->
            <?php global $listingsArray ?>
 
            <?php foreach($listingsArray as $listing) : ?>
@@ -27,7 +26,7 @@
                     </p>
                     <ul class="my-4 bg-gray-100 p-4 rounded">
                         <li class="mb-2"><strong>Salary:</strong>
-                            $<?= number_format($listing->salary, 2, '.', '') ?>
+                            <?= formatSalary($listing->salary) ?>
                         </li>
                         <li class="mb-2">
                             <strong>Location:</strong>
