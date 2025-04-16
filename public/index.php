@@ -6,6 +6,11 @@
 require '../helpers.php';
 require basePath('Router.php');
 require basePath('Database.php');
+require basePath('Models/ModelJob.php');
+
+global $modelJob;
+$modelJob = new ModelJobClass();
+//inspect($modelJob);
 
 $router = new Router();
 
