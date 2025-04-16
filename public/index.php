@@ -3,18 +3,15 @@
 //php -S localhost:8000
 //php -S localhost:8000 -t public
 
-
-
+use App\models\ModelJobClass;
 use Framework\Router;
-use Model\ModelJobClass;
-
 
 require __DIR__ . '/../vendor/autoload.php';
 
 require '../helpers.php';
 //require basePath('Framework/Router.php');
 //require basePath('Framework/Database.php');
-require basePath('App/models/ModelJob.php');
+//require basePath('App/models/ModelJobClass.php');
 
 //spl_autoload_register(function ($class) {
 //    $path = basePath('Framework/' . $class . '.php'  );
