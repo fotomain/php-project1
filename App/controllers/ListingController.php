@@ -232,8 +232,7 @@ class ListingController {
             exit;
         } else {
 //            echo '$updatedValues';
-//            inspect($updatedValues);
-//            inspectAndDie('Listing updated successfully');
+//            inspectAndDie($updatedValues);
 
             $updateFields=[];
             foreach (array_keys($updatedValues) as $field) {
