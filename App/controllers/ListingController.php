@@ -26,8 +26,8 @@ class ListingController {
     public function create() {
         loadView("listings/create");
     }
-    public function show() {
-        $id = $_GET['id'] ?? '';
+    public function show($params) {
+        $id = $params['id'] ?? '';
 //inspect($id);
 
         $params = ['id' => $id];
@@ -38,6 +38,11 @@ class ListingController {
         )->fetchAll();
 
 //inspect($listing);
+
+        if(!$listing){
+            ErrorController::notFound('Listing not found');
+            return;
+        }
 
         global $modelJob;
         $modelJob->setCurrentElement($listing[0]);
