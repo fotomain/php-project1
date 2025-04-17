@@ -141,10 +141,10 @@ class Router
                         (new Authorize())->handle($middleware);
                     }
 
+                    // Instatiate the controller and call the method
                     $controller = 'App\\controllers\\' . $route['controller'];
                     $controllerMethod = $route['controllerMethod'];
 
-                    // Instatiate the controller and call the method
                     $controllerInstance = new $controller();
                     $controllerInstance->$controllerMethod($params);
                     return;
