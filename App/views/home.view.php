@@ -16,7 +16,7 @@
             <!-- Job Listing 2: -->
            <?php global $modelJob; ?>
 
-           <?php foreach($modelJob->getJobList() as $listing) : ?>
+           <?php foreach($modelJob->getDataList() as $listing) : ?>
 
             <div class="rounded-lg shadow-md bg-white">
                 <div class="p-4">

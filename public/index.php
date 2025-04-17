@@ -3,6 +3,7 @@
 //php -S localhost:8000
 //php -S localhost:8000 -t public
 
+use App\models\ModelErrorClass;
 use App\models\ModelJobClass;
 use Framework\Router;
 
@@ -10,8 +11,9 @@ require __DIR__ . '/../vendor/autoload.php';
 
 require '../helpers.php';
 
-global $modelJob;
-$modelJob = new ModelJobClass();
+global $modelJob;   $modelJob   = new ModelJobClass();
+global $modelError; $modelError = new ModelErrorClass();
+
 //inspect($modelJob);
 
 $router = new Router();

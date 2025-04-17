@@ -17,7 +17,7 @@ class ListingController {
         $listings=$this->db->query('SELECT * FROM listings1 ')->fetchAll();
 
         global $modelJob;
-        $modelJob->setJobList($listings);
+        $modelJob->setDataList($listings);
 
         loadView("listings/index");
 
@@ -40,7 +40,7 @@ class ListingController {
 //inspect($listing);
 
         global $modelJob;
-        $modelJob->setCurrentJob($listing[0]);
+        $modelJob->setCurrentElement($listing[0]);
 
 //global $showData;
 //$showData = $listing[0];

@@ -17,7 +17,7 @@ class HomeController {
         $listings=$this->db->query('SELECT * FROM listings1 LIMIT 3')->fetchAll();
 
         global $modelJob;
-        $modelJob->setJobList($listings);
+        $modelJob->setDataList($listings);
 
         loadView("home");
 
