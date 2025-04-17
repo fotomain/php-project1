@@ -250,16 +250,8 @@ class ListingController {
 
             redirect("/listings");
             exit;
-
         }
 
-
-
-//        inspectAndDie($listing[0]);
-
-//        loadView('listings/edit');
-
-        inspectAndDie($params);
     }
 
 }
