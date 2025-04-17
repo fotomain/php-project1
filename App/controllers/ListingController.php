@@ -246,7 +246,9 @@ class ListingController {
             $updatedValues['id']=$id;
             $this->db->query($query,$updatedValues);
 
-            redirect("/listings");
+            $_SESSION['success_message'] = 'Listing updated successfully';
+
+            redirect("/listing/".$id);
             exit;
         }
     }

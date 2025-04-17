@@ -44,7 +44,7 @@ function inspectAndDie($value)
 
 function formatSalary($value)
 {
-    return '$'.number_format((float)$value, 2, '.', '');
+    return '$'.number_format((float)$value, 0, '', ',');
 }
 function sanitize($value){
     return filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS);

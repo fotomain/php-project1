@@ -8,6 +8,7 @@
 
 <section class="flex justify-center items-center mt-20">
     <div class="bg-white p-8 rounded-lg shadow-md w-full md:w-600 mx-6">
+
         <h2 class="text-4xl text-center font-bold mb-4">
             Edit Job Listing
         </h2>
