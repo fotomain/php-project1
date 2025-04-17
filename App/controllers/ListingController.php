@@ -31,7 +31,6 @@ class ListingController {
         global $modelJob;
 
         $defalultDataCreate=ModelJobClass::$defalultDataCreate;
-//        $defalultDataCreate=array_flip($defalultDataCreate);
         $defalultDataCreate=json_decode(json_encode($defalultDataCreate));
         $modelJob->setCurrentElement($defalultDataCreate);
 
@@ -55,12 +54,9 @@ class ListingController {
             return;
         }
 
+        //data for page
         global $modelJob;
         $modelJob->setCurrentElement($listing[0]);
-
-//global $showData;
-//$showData = $listing[0];
-
 
         loadView('listings/show');
 
@@ -153,6 +149,118 @@ class ListingController {
 
         redirect("/listings");
 
+    }
+
+    public function edit($params) {
+        $id = $params['id'] ?? '';
+//inspect($id);
+
+        $params = ['id' => $id];
+
+        $listing = $this->db->query(
+            "SELECT * FROM listings1 WHERE id = :id "
+            ,$params
+        )->fetchAll();
+
+//inspect($listing);
+
+        if(!$listing){
+            ErrorController::notFound('Listing not found');
+            return;
+        }
+
+        global $modelJob;
+        $modelJob->setCurrentElement($listing[0]);
+
+//        inspectAndDie($listing[0]);
+
+        loadView('listings/edit');
+
+    }
+
+    public function update($params) {
+
+        $id = $params['id'] ?? '';
+//inspect($id);
+
+        $params = ['id' => $id];
+
+        $listing = $this->db->query(
+            "SELECT * FROM listings1 WHERE id = :id "
+            ,$params
+        )->fetchAll();
+
+//inspect($listing);
+
+        if(!$listing){
+            ErrorController::notFound('Listing not found');
+            return;
+        }
+
+        //data for page
+        global $modelJob;
+        $modelJob->setCurrentElement($listing[0]);
+
+        $allowedFields=ModelJobClass::$allowedFields;
+
+        $updatedValues=array_intersect_key($_POST, array_flip($allowedFields));
+
+        $updatedValues=array_map('sanitize', $updatedValues);
+
+        $requiredFields = ModelJobClass::$requiredFields;
+
+        $errors = [];
+
+        foreach ($requiredFields as $field) {
+            if(empty($updatedValues[$field]) || !Validation::string($updatedValues[$field])) {
+                $errors[$field] = ucfirst($field).' <- Field is required';
+            }
+        }
+
+//        inspectAndDie($errors);
+
+        if(!empty($errors)) {
+            //Reload THIS vies with errors
+            $err = new \stdClass();
+            $err->message = $errors;
+            $err->code = 503;
+
+            global $modelError;
+            $modelError->setErrorMessage($err);
+
+            loadView('listings/edit');
+            exit;
+        } else {
+//            echo '$updatedValues';
+//            inspect($updatedValues);
+//            inspectAndDie('Listing updated successfully');
+
+            $updateFields=[];
+            foreach (array_keys($updatedValues) as $field) {
+                $updateFields[]="{$field} = :{$field}";
+            }
+
+            $updateFields=implode(',', $updateFields);
+
+            $query = "UPDATE listings1 SET ".$updateFields." WHERE id = :id";
+
+//            inspectAndDie($query);
+
+            $updatedValues['id']=$id;
+            $this->db->query($query,$updatedValues);
+
+            redirect("/listings");
+            exit;
+
+        }
+
+
+
+//        inspectAndDie($listing[0]);
+
+//        loadView('listings/edit');
+
+        inspectAndDie($params);
     }
 
 }
