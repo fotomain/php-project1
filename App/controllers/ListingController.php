@@ -251,7 +251,5 @@ class ListingController {
             redirect("/listings");
             exit;
         }
-
     }
-
 }
