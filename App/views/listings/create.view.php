@@ -16,10 +16,28 @@
             <h2 class="text-2xl font-bold mb-6 text-center text-gray-500">
                 Job Info
             </h2>
+
+            <?php global $modelError; ?>
+            <?php if(!empty($modelError->getErrorMessage())) : ?>
+                <?php foreach($modelError->getErrorMessage()->message as $error) : ?>
+                    <div class="message bg-red-100 my-3">
+                        <?= $error ?>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+            <?php global $modelJob; $showData=$modelJob->getCurrentElement()?>
+
+            <div>showData</div>
+<!--            <div>--><?php //echo json_encode($showData->title); ?><!--</div>-->
+<!--            --><?php //= $showData->title ?>
+            <div><?php inspect($showData); ?></div>
+
             <div class="mb-4">
                 <input
                     type="text"
                     name="title"
+                    value="<?= $showData->title ?>"
                     placeholder="Job Title"
                     class="w-full px-4 py-2 border rounded focus:outline-none"
                 />
@@ -29,12 +47,15 @@
                 name="description"
                 placeholder="Job Description"
                 class="w-full px-4 py-2 border rounded focus:outline-none"
-            ></textarea>
+            >
+                <?= $showData->description ?>
+            </textarea>
             </div>
             <div class="mb-4">
                 <input
                     type="text"
                     name="salary"
+                    value="<?= $showData->salary ?>"
                     placeholder="Annual Salary"
                     class="w-full px-4 py-2 border rounded focus:outline-none"
                 />

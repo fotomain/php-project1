@@ -15,8 +15,7 @@ class ListingController {
 
     public function index() {
 
-       inspectAndDie(Validation::email('aa@gmail.com'));
-
+//       inspectAndDie(Validation::email('aa@gmail.com'));
 
         $listings=$this->db->query('SELECT * FROM listings1 ')->fetchAll();
 
@@ -56,6 +55,72 @@ class ListingController {
 
 
         loadView('listings/show');
+
+    }
+
+    public function store($params) {
+
+        $allowedFields=['title', 'description', 'salary', 'tags', 'company', 'address', 'city', 'state', 'phone', 'email', 'requirements', 'benefits'];
+
+        $newListingData=array_intersect_key($_POST, array_flip($allowedFields));
+
+        $newListingData['user_id']=1;
+
+
+        $newListingData=array_map('sanitize', $newListingData);
+
+        $requiredFields = ['title', 'description', 'salary', 'email', 'city', 'state'];
+
+        $errors = [];
+
+        foreach ($requiredFields as $field) {
+            if(empty($newListingData[$field]) || !Validation::string($newListingData[$field])) {
+                $errors[$field] = ucfirst($field).' <- Field is required';
+            }
+        }
+
+        global $modelJob;
+        $modelJob->setCurrentElement(json_decode(json_encode($newListingData)));
+
+        if(!empty($errors)) {
+            //Reload THIS vies with errors
+            $err = new \stdClass();
+            $err->message = $errors;
+            $err->code = 503;
+
+            global $modelError;
+            $modelError->setErrorMessage($err);
+
+            loadView('listings/create');
+
+        } else {
+            $fields=[];
+            foreach(
+                $newListingData as $field=>$value
+            ){
+                $fields[]=$field;
+            }
+
+            $fields=implode(',', $fields);
+
+            $values=[];
+            foreach(
+                $newListingData as $field=>$value
+            ){
+                $values[]=':'.$field;
+            }
+
+            $values=implode(',', $values);
+
+            $query = "INSERT INTO listings1 (".$fields.") VALUES (".$values.")";
+
+//            inspectAndDie($query);
+
+            $this->db->query($query,$newListingData);
+
+        }
+
+//               inspectAndDie($newListingData);
 
     }
 

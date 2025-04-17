@@ -22,6 +22,7 @@ abstract class ModelAbstractClass {
         return $this->dataList;
     }
     public function setCurrentElement($currentElement):mixed{
+//        inspectAndDie($currentElement);
         $this->currentElement = $currentElement;
         return $this;
     }

@@ -46,3 +46,6 @@ function formatSalary($value)
 {
     return '$'.number_format((float)$value, 2, '.', '');
 }
+function sanitize($value){
+    return filter_var(trim($value), FILTER_SANITIZE_SPECIAL_CHARS);
+}
