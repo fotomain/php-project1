@@ -9,4 +9,5 @@ $router->get('/listing/{id}','ListingController@show');
 
 $router->post('/listings','ListingController@store');
 
+$router->delete('/listing/{id}','ListingController@destroy');
 //echo inspect($router);

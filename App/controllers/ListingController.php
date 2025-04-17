@@ -135,7 +135,23 @@ class ListingController {
 
         }
 
-//               inspectAndDie($newListingData);
+    }
+
+    public function destroy($params) {
+
+        $id = $params['id'] ?? '';
+        $params = ['id' => $id];
+        $listing = $this->db->query('SELECT * FROM listings1 WHERE id = :id ', $params)->fetch();
+        if(!$listing){
+            ErrorController::notFound('Element not found with ID: '.$id);
+            return;
+        }
+
+        $this->db->query('DELETE FROM listings1 WHERE id = :id ', $params);
+
+        redirect("/listings");
+
+//        inspectAndDie($listing);
 
     }
 
