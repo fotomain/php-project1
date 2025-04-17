@@ -5,6 +5,7 @@ namespace App\models;
 class ModelJobClass extends ModelAbstractClass{
 
     public static $allowedFields=['title', 'description', 'salary', 'tags', 'company', 'address', 'city', 'state', 'phone', 'email', 'requirements', 'benefits'];
+    public static $requiredFields=['title', 'description', 'salary', 'email', 'city', 'state'];
     public static $defalultDataCreate=[
         'title'=>'Title',
         'description'=>'',

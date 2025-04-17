@@ -36,8 +36,11 @@
                     >
                 </li>
                 <li class="mb-2">
-                    <strong>Tags:</strong> <span><?= $showData->tags?></span>,
-                    <span>Coding</span>
+
+                    <?php if(!empty($showData->tags)) : ?>
+                        <strong>Tags:</strong> <span><?= $showData->tags?></span>,
+                    <?php endif;?>
+
                 </li>
             </ul>
         </div>

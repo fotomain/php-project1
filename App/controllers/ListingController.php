@@ -71,15 +71,14 @@ class ListingController {
         global $modelJob;
 
         $allowedFields=ModelJobClass::$allowedFields;
+        $requiredFields = ModelJobClass::$requiredFields;
 
         $newListingData=array_intersect_key($_POST, array_flip($allowedFields));
 
         $newListingData['user_id']=1;
 
-
         $newListingData=array_map('sanitize', $newListingData);
 
-        $requiredFields = ['title', 'description', 'salary', 'email', 'city', 'state'];
 
         $errors = [];
 
@@ -130,6 +129,9 @@ class ListingController {
 //            inspectAndDie($query);
 
             $this->db->query($query,$newListingData);
+
+            redirect("/listings");
+            exit;
 
         }
 
