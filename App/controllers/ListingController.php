@@ -243,8 +243,6 @@ class ListingController {
 
             $query = "UPDATE listings1 SET ".$updateFields." WHERE id = :id";
 
-//            inspectAndDie($query);
-
             $updatedValues['id']=$id;
             $this->db->query($query,$updatedValues);
 
