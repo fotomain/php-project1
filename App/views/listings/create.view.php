@@ -63,6 +63,7 @@
                 <input
                     type="text"
                     name="requirements"
+                    value="<?= $showData->requirements ?>"
                     placeholder="Requirements"
                     class="w-full px-4 py-2 border rounded focus:outline-none"
                 />
@@ -71,6 +72,7 @@
                 <input
                     type="text"
                     name="benefits"
+                    value="<?= $showData->benefits ?>"
                     placeholder="Benefits"
                     class="w-full px-4 py-2 border rounded focus:outline-none"
                 />
@@ -82,6 +84,7 @@
                 <input
                     type="text"
                     name="company"
+                    value="<?= $showData->company ?>"
                     placeholder="Company Name"
                     class="w-full px-4 py-2 border rounded focus:outline-none"
                 />
@@ -90,6 +93,7 @@
                 <input
                     type="text"
                     name="address"
+                    value="<?= $showData->address ?>"
                     placeholder="Address"
                     class="w-full px-4 py-2 border rounded focus:outline-none"
                 />
@@ -98,6 +102,7 @@
                 <input
                     type="text"
                     name="city"
+                    value="<?= $showData->city ?>"
                     placeholder="City"
                     class="w-full px-4 py-2 border rounded focus:outline-none"
                 />
@@ -106,6 +111,7 @@
                 <input
                     type="text"
                     name="state"
+                    value="<?= $showData->state ?>"
                     placeholder="State"
                     class="w-full px-4 py-2 border rounded focus:outline-none"
                 />
@@ -114,6 +120,7 @@
                 <input
                     type="text"
                     name="phone"
+                    value="<?= $showData->phone ?>"
                     placeholder="Phone"
                     class="w-full px-4 py-2 border rounded focus:outline-none"
                 />
@@ -122,6 +129,7 @@
                 <input
                     type="email"
                     name="email"
+                    value="<?= $showData->email ?>"
                     placeholder="Email Address For Applications"
                     class="w-full px-4 py-2 border rounded focus:outline-none"
                 />

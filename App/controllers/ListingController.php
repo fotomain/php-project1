@@ -89,8 +89,8 @@ class ListingController {
             }
         }
 
-//        inspectAndDie($newListingData);
         $modelJob->setCurrentElement(json_decode(json_encode($newListingData)));
+//        inspect($modelJob->getCurrentElement());
 
         if(!empty($errors)) {
             //Reload THIS vies with errors
@@ -120,8 +120,8 @@ class ListingController {
                 $values[]=':'.$field;
             }
 
-            inspect($values);
-            inspect($newListingData);
+//            inspect($values);
+//            inspect($newListingData);
 
             $values=implode(',', $values);
 
