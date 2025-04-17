@@ -2,6 +2,7 @@
 
 namespace App\controllers;
 
+use App\models\ModelJobClass;
 use Framework\Database;
 use Framework\Validation;
 
@@ -27,6 +28,13 @@ class ListingController {
     }
 
     public function create() {
+        global $modelJob;
+
+        $defalultDataCreate=ModelJobClass::$defalultDataCreate;
+//        $defalultDataCreate=array_flip($defalultDataCreate);
+        $defalultDataCreate=json_decode(json_encode($defalultDataCreate));
+        $modelJob->setCurrentElement($defalultDataCreate);
+
         loadView("listings/create");
     }
     public function show($params) {
@@ -60,7 +68,9 @@ class ListingController {
 
     public function store($params) {
 
-        $allowedFields=['title', 'description', 'salary', 'tags', 'company', 'address', 'city', 'state', 'phone', 'email', 'requirements', 'benefits'];
+        global $modelJob;
+
+        $allowedFields=ModelJobClass::$allowedFields;
 
         $newListingData=array_intersect_key($_POST, array_flip($allowedFields));
 
@@ -79,7 +89,7 @@ class ListingController {
             }
         }
 
-        global $modelJob;
+//        inspectAndDie($newListingData);
         $modelJob->setCurrentElement(json_decode(json_encode($newListingData)));
 
         if(!empty($errors)) {
@@ -109,6 +119,9 @@ class ListingController {
             ){
                 $values[]=':'.$field;
             }
+
+            inspect($values);
+            inspect($newListingData);
 
             $values=implode(',', $values);
 

@@ -28,7 +28,9 @@ class Database
             $stmt = $this->conn->prepare($query);
 
             foreach($params as $param=>$value){
-                $stmt->bindParam($param,$value);
+                inspect($param);
+                inspect($value);
+                $stmt->bindValue(':'.$param,$value);
             }
 
             $stmt->execute();

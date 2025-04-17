@@ -28,10 +28,9 @@
 
             <?php global $modelJob; $showData=$modelJob->getCurrentElement()?>
 
-            <div>showData</div>
-<!--            <div>--><?php //echo json_encode($showData->title); ?><!--</div>-->
-<!--            --><?php //= $showData->title ?>
-            <div><?php inspect($showData); ?></div>
+<!--            <div>inspect-showData</div>-->
+<!--            <div>--><?php //inspect($showData->title); ?><!--</div>-->
+<!--            <div>--><?php //inspect($showData); ?><!--</div>-->
 
             <div class="mb-4">
                 <input
