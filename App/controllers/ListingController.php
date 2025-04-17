@@ -151,8 +151,6 @@ class ListingController {
 
         redirect("/listings");
 
-//        inspectAndDie($listing);
-
     }
 
 }
