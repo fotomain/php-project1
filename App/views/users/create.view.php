@@ -9,11 +9,15 @@
 
         <?= loadPartial('errors') ?>
 
+        <?php global $modelUser; $showData=$modelUser->getCurrentElement()?>
+<!--        --><?php //echo inspectAndDie($modelUser)?>
+
         <form method="POST" action="/auth/register">
             <div class="mb-4">
                 <input
                     type="text"
                     name="name"
+                    value="<?= $showData->name ?>"
                     placeholder="Full Name"
                     class="w-full px-4 py-2 border rounded focus:outline-none"
                 />
@@ -22,6 +26,7 @@
                 <input
                     type="email"
                     name="email"
+                    value="<?= $showData->email ?>"
                     placeholder="Email Address"
                     class="w-full px-4 py-2 border rounded focus:outline-none"
                 />
@@ -46,6 +51,7 @@
                 <input
                     type="password"
                     name="password"
+                    value="<?= $showData->password ?>"
                     placeholder="Password"
                     class="w-full px-4 py-2 border rounded focus:outline-none"
                 />
@@ -54,6 +60,7 @@
                 <input
                     type="password"
                     name="password_confirmation"
+                    value="<?= $showData->password_confirmation ?>"
                     placeholder="Confirm Password"
                     class="w-full px-4 py-2 border rounded focus:outline-none"
                 />

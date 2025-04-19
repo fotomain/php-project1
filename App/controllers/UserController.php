@@ -2,6 +2,8 @@
 
 namespace App\controllers;
 
+use App\models\ModelJobClass;
+use App\models\ModelUserClass;
 use Framework\Database;
 use Framework\Validation;
 
@@ -17,6 +19,13 @@ class UserController extends \stdClass {
         loadView('users/login');
     }
     public function create() {
+
+        global $modelUser;
+        $defalultDataCreate=ModelUserClass::$defalultDataCreate;
+        $defalultDataCreate=json_decode(json_encode($defalultDataCreate));
+        $modelUser->setCurrentElement($defalultDataCreate);
+//        inspectAndDie($modelUser);
+
         loadView('users/create');
     }
 
@@ -45,6 +54,17 @@ class UserController extends \stdClass {
             $errors['password_confirmation']="Please enter valid matched passwords !";
         }
 
+        $dataNow = ([
+            "name"=>$name,
+            "email"=>$email,
+            "city"=>$city,
+            "state"=>$state,
+            "password"=>$password,
+            "password_confirmation"=>$passwordConfirmation,
+        ]);
+        $dataNow=json_decode(json_encode($dataNow));
+        global $modelUser;
+        $modelUser->setCurrentElement($dataNow);
 
         if($errors){
 
@@ -55,8 +75,28 @@ class UserController extends \stdClass {
             global $modelError;
             $modelError->setErrorMessage($err);
 
-            loadView('users/create', $err);
+            loadView('users/create');
+            exit;
 
+        } else {
+            //check if email exist
+            $params = [
+                'email' => $email,
+            ];
+            $user = $this->db->query('SELECT * FROM users1 WHERE email=:email', $params)->fetch();
+
+                if($user) {
+
+                    $errors['user']="User already exists";
+                    $err = new \stdClass();
+                    $err->message = $errors;
+                    $err->code = 503;
+
+                    global $modelError;
+                    $modelError->setErrorMessage($err);
+
+                    loadView('users/create', $err);
+                }
         }
 
         inspectAndDie("store");

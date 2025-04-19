@@ -6,12 +6,14 @@
 session_start();
 use App\models\ModelErrorClass;
 use App\models\ModelJobClass;
+use App\models\ModelUserClass;
 use Framework\Router;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 require '../helpers.php';
 
+global $modelUser;  $modelUser  = new ModelUserClass();
 global $modelJob;   $modelJob   = new ModelJobClass();
 global $modelError; $modelError = new ModelErrorClass();
 
