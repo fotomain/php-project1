@@ -14,14 +14,7 @@
                 Job Info
             </h2>
 
-            <?php global $modelError; ?>
-            <?php if(!empty($modelError->getErrorMessage())) : ?>
-                <?php foreach($modelError->getErrorMessage()->message as $error) : ?>
-                    <div class="message bg-red-100 my-3">
-                        <?= $error ?>
-                    </div>
-                <?php endforeach; ?>
-            <?php endif; ?>
+            <?= loadPartial('errors') ?>
 
             <?php global $modelJob; $showData=$modelJob->getCurrentElement()?>
 
