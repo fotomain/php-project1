@@ -54,17 +54,17 @@ class UserController extends \stdClass {
             $errors['password_confirmation']="Please enter valid matched passwords !";
         }
 
-        $dataNow = ([
+        $formState = [
             "name"=>$name,
             "email"=>$email,
             "city"=>$city,
             "state"=>$state,
             "password"=>$password,
             "password_confirmation"=>$passwordConfirmation,
-        ]);
-        $dataNow=json_decode(json_encode($dataNow));
+        ];
+        $formState=json_decode(json_encode($formState));
         global $modelUser;
-        $modelUser->setCurrentElement($dataNow);
+        $modelUser->setCurrentElement($formState);
 
         if($errors){
 
@@ -96,10 +96,28 @@ class UserController extends \stdClass {
                     $modelError->setErrorMessage($err);
 
                     loadView('users/create', $err);
+                    exit;
                 }
+
+            $params=$formState;
+            unset($params->password_confirmation);
+            $params->password=password_hash($params->password,PASSWORD_DEFAULT);
+
+            $this->db->query('INSERT INTO users1 (
+                    name, 
+                    email, 
+                    city, 
+                    state, 
+                    password
+                    ) 
+                    VALUES (:name, :email, :city, :state, :password)'
+                , $params);
+            $userId = $this->db->conn->lastInsertId();
+            inspect($userId);
+
         }
 
-        inspectAndDie("store");
+//        inspectAndDie("store");
 
     }
 
