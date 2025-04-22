@@ -5,6 +5,7 @@ namespace App\controllers;
 use App\models\ModelJobClass;
 use App\models\ModelUserClass;
 use Framework\Database;
+use Framework\Session;
 use Framework\Validation;
 
 class UserController extends \stdClass {
@@ -112,13 +113,24 @@ class UserController extends \stdClass {
                     ) 
                     VALUES (:name, :email, :city, :state, :password)'
                 , $params);
+
             $userId = $this->db->conn->lastInsertId();
-            inspect($userId);
+            Session::set('user',[
+                "id"=>$userId,
+                "name"=>$name,
+                "email"=>$email,
+            ]);
+
+            redirect('/');
 
         }
+    }
 
-//        inspectAndDie("store");
-
+    public function logout() {
+        Session::clearAll();
+        $params = session_get_cookie_params();
+        setcookie("PHPSESSID", '', time() - 86400, $params['path'], $params['domain']);
+        redirect('/');
     }
 
 }

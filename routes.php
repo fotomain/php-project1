@@ -15,9 +15,10 @@ $router->get('/listing/edit/{id}','ListingController@edit');
 $router->put('/listing/{id}','ListingController@update');
 
 $router->get('/auth/register','UserController@create');
-$router->get('/auth/login','UserController@login');
-
 $router->post('/auth/register','UserController@store');
 
+$router->get('/auth/login','UserController@login');
+$router->post('/auth/logout','UserController@logout');
 
-//echo inspect($router);
+
+

@@ -1,5 +1,8 @@
 <?php
 
+
+//inspectAndDie(session_status()); //0-disabled 1-no seddio 2-started
+
 function basePath($path='')
 {
     return __DIR__.'/'.$path;

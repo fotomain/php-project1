@@ -1,17 +1,19 @@
 <?php
+require __DIR__ . '/../vendor/autoload.php';
+require '../helpers.php';
 
 //php -S localhost:8000
 //php -S localhost:8000 -t public
 
-session_start();
+use Framework\Session; //auto call
+Session::start();
+//inspectAndDie(session_status());
+
 use App\models\ModelErrorClass;
 use App\models\ModelJobClass;
 use App\models\ModelUserClass;
 use Framework\Router;
 
-require __DIR__ . '/../vendor/autoload.php';
-
-require '../helpers.php';
 
 global $modelUser;  $modelUser  = new ModelUserClass();
 global $modelJob;   $modelJob   = new ModelJobClass();
