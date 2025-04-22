@@ -170,7 +170,7 @@ class UserController extends \stdClass {
         if(!Validation::email($email)) {
             $errors['email']="Please enter a valid email address";
         }
-        if(!Validation::string($password,6,50)) {
+        if(!Validation::string($password,6)) {
             $errors['password']="Please enter valid name between 2 and 50 characters";
         }
 
@@ -197,6 +197,43 @@ class UserController extends \stdClass {
             loadView('users/login');
             exit;
         }
+
+        $params = [
+            'email' => $email,
+        ];
+
+        $user = $this->db->query('SELECT * FROM users1 WHERE email=:email', $params)->fetch();
+
+        if(!$user) {
+            $errors['user']="Incorrect email";
+            $err = new \stdClass();
+            $err->message = $errors;
+            $err->code = 503;
+            global $modelError;
+            $modelError->setErrorMessage($err);
+            loadView('users/login');
+            exit;
+        }
+
+        if(!password_verify($password, $user->password)) {
+            $errors['password']="Incorrect password";
+            $err = new \stdClass();
+            $err->message = $errors;
+            $err->code = 503;
+            global $modelError;
+            $modelError->setErrorMessage($err);
+            loadView('users/login');
+            exit;
+        }
+
+        Session::set('user',[
+            "id"=>$user->id,
+            "name"=>$user->name,
+            "email"=>$user->email
+        ]);
+
+        redirect('/');
+
     }
 
 }
