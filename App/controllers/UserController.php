@@ -17,6 +17,34 @@ class UserController extends \stdClass {
     }
 
     public function login() {
+
+        if(isset($_POST['email'])) {
+            $email=$_POST['email'];
+        } else {
+            $email='';
+        }
+        if(isset($_POST['password'])) {
+            $password=$_POST['password'];
+        } else {
+            $password='';
+        }
+
+        $formState = [
+            "email"=>$email,
+            "password"=>$password,
+        ];
+        $formState=json_decode(json_encode($formState));
+        global $modelUser;
+        $modelUser->setCurrentElement($formState);
+
+
+//        if(null===$showData){
+//            $showData=new stdClass();
+//            $showData->email='';
+//            $showData->password='';
+//        }
+
+
         loadView('users/login');
     }
     public function create() {
@@ -131,6 +159,44 @@ class UserController extends \stdClass {
         $params = session_get_cookie_params();
         setcookie("PHPSESSID", '', time() - 86400, $params['path'], $params['domain']);
         redirect('/');
+    }
+
+    function authenticate()
+    {
+//        inspectAndDie("authenticate1");
+        $email=$_POST['email'];
+        $password=$_POST['password'];
+        $errors=[];
+        if(!Validation::email($email)) {
+            $errors['email']="Please enter a valid email address";
+        }
+        if(!Validation::string($password,6,50)) {
+            $errors['password']="Please enter valid name between 2 and 50 characters";
+        }
+
+        $email=$_POST['email'];
+        $password=$_POST['password'];
+
+//        inspectAndDie($email);
+
+        $formState = [
+            "email"=>$email,
+            "password"=>$password,
+        ];
+        $formState=json_decode(json_encode($formState));
+        global $modelUser;
+        $modelUser->setCurrentElement($formState);
+
+        if(!empty($errors))
+        {
+            $err = new \stdClass();
+            $err->message = $errors;
+            $err->code = 503;
+            global $modelError;
+            $modelError->setErrorMessage($err);
+            loadView('users/login');
+            exit;
+        }
     }
 
 }
