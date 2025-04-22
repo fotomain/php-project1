@@ -14,7 +14,11 @@ class HomeController {
 
     public function index() {
 
-        $listings=$this->db->query('SELECT * FROM listings1 LIMIT 3')->fetchAll();
+        $listings=$this->db->query('
+            SELECT * FROM listings1
+                ORDER BY created_at DESC
+                LIMIT 3
+        ')->fetchAll();
 
         global $modelJob;
         $modelJob->setDataList($listings);

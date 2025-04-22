@@ -4,6 +4,7 @@ namespace App\controllers;
 
 use App\models\ModelJobClass;
 use Framework\Database;
+use Framework\Session;
 use Framework\Validation;
 
 class ListingController {
@@ -18,7 +19,10 @@ class ListingController {
 
 //       inspectAndDie(Validation::email('aa@gmail.com'));
 
-        $listings=$this->db->query('SELECT * FROM listings1 ')->fetchAll();
+        $listings=$this->db->query('
+            SELECT * FROM listings1
+            ORDER BY created_at DESC
+        ')->fetchAll();
 
         global $modelJob;
         $modelJob->setDataList($listings);
@@ -71,7 +75,7 @@ class ListingController {
 
         $newListingData=array_intersect_key($_POST, array_flip($allowedFields));
 
-        $newListingData['user_id']=1;
+        $newListingData['user_id']=Session::get('user')['id'];
 
         $newListingData=array_map('sanitize', $newListingData);
 
@@ -141,6 +145,11 @@ class ListingController {
         if(!$listing){
             ErrorController::notFound('Element not found with ID: '.$id);
             return;
+        }
+
+        if(Session::get('user')['id'] !== $listing->user_id){
+            $_SESSION['error_message']="You can't delete this listing";
+            return redirect("/listing/" .$id);
         }
 
         $this->db->query('DELETE FROM listings1 WHERE id = :id ', $params);

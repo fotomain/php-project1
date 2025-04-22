@@ -9,16 +9,6 @@ class Router
 {
     protected $routes = [];
 
-    /**
-     * Add a new route
-     *
-     * @param string $method
-     * @param string $uri
-     * @param string $action
-     * @param array $middleware
-     *
-     * @return void
-     */
     public function registerRoute($method, $uri, $action, $middleware = [])
     {
         list($controller, $controllerMethod) = explode('@', $action);
@@ -30,6 +20,7 @@ class Router
             'controllerMethod' => $controllerMethod,
             'middleware' => $middleware
         ];
+
     }
 
     /**
@@ -45,55 +36,24 @@ class Router
         $this->registerRoute('GET', $uri, $controller, $middleware);
     }
 
-    /**
-     * Add a POST route
-     *
-     * @param string $uri
-     * @param string $controller
-     * @param array $middleware
-     *
-     * @return void
-     */
     public function post($uri, $controller, $middleware = [])
     {
         $this->registerRoute('POST', $uri, $controller, $middleware);
     }
 
-    /**
-     * Add a PUT route
-     *
-     * @param string $uri
-     * @param string $controller
-     * @param array $middleware
-     *
-     * @return void
-     */
+
     public function put($uri, $controller, $middleware = [])
     {
         $this->registerRoute('PUT', $uri, $controller, $middleware);
     }
 
-    /**
-     * Add a DELETE route
-     *
-     * @param string $uri
-     * @param string $controller
-     * @param array $middleware
-     *
-     * @return void
-     */
+
     public function delete($uri, $controller, $middleware = [])
     {
         $this->registerRoute('DELETE', $uri, $controller, $middleware);
     }
 
-    /**
-     * Route the request
-     *
-     * @param string $uri
-     * @param string $method
-     * @return void
-     */
+
     public function route($uri)
     {
         $requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -138,7 +98,9 @@ class Router
                 if ($match) {
                     // go normal run
                     foreach ($route['middleware'] as $middleware) {
+
                         (new Authorize())->handle($middleware);
+
                     }
 
                     // Instatiate the controller and call the method
