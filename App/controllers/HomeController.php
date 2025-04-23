@@ -14,13 +14,10 @@ class HomeController {
 
     public function index() {
 
-        $listings=$this->db->query('
-            SELECT * FROM listings1
-                ORDER BY created_at DESC
-                LIMIT 3
-        ')->fetchAll();
-
         global $modelJob;
+
+        $listings=$modelJob::readFavorites($this->db);
+
         $modelJob->setDataList($listings);
 
         loadView("home");

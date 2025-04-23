@@ -144,7 +144,7 @@ class UserController extends \stdClass {
 
             $userId = $this->db->conn->lastInsertId();
             Session::set('user',[
-                "id"=>$userId,
+                "id"=>(int) $userId,
                 "name"=>$name,
                 "email"=>$email,
             ]);

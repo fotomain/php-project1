@@ -18,14 +18,10 @@ class ListingController {
 
     public function index() {
 
-//       inspectAndDie(Validation::email('aa@gmail.com'));
-
-        $listings=$this->db->query('
-            SELECT * FROM listings1
-            ORDER BY created_at DESC
-        ')->fetchAll();
-
         global $modelJob;
+
+        $listings=$modelJob::readCollection($this->db);
+
         $modelJob->setDataList($listings);
 
         loadView("listings/index");
@@ -43,16 +39,12 @@ class ListingController {
     }
     public function show($params) {
         $id = $params['id'] ?? '';
-//inspect($id);
 
         $params = ['id' => $id];
 
-        $listing = $this->db->query(
-            "SELECT * FROM listings1 WHERE id = :id "
-            ,$params
-        )->fetchAll();
+        global $modelJob;
 
-//inspect($listing);
+        $listing=$modelJob::readElement($this->db, $params);
 
         if(!$listing){
             ErrorController::notFound('Listing not found');
@@ -60,8 +52,7 @@ class ListingController {
         }
 
         //data for page
-        global $modelJob;
-        $modelJob->setCurrentElement($listing[0]);
+        $modelJob->setCurrentElement($listing);
 
         loadView('listings/show');
 
@@ -104,27 +95,30 @@ class ListingController {
             loadView('listings/create');
 
         } else {
-            $fields=[];
+            $fieldsNames=[];
             foreach(
                 $newListingData as $field=>$value
             ){
-                $fields[]=$field;
+                $fieldsNames[]=$field;
             }
 
-            $fields=implode(',', $fields);
+            $fieldsNames=implode(',', $fieldsNames);
 
-            $values=[];
+            $valuesNames=[];
             foreach(
                 $newListingData as $field=>$value
             ){
-                $values[]=':'.$field;
+                $valuesNames[]=':'.$field;
             }
 
-            $values=implode(',', $values);
+            $valuesNames=implode(',', $valuesNames);
 
-            $query = "INSERT INTO listings1 (".$fields.") VALUES (".$values.")";
-
-            $this->db->query($query,$newListingData);
+            $listings=$modelJob::createElement(
+                $this->db
+                ,$fieldsNames
+                ,$valuesNames
+                ,$newListingData
+            );
 
             Session::setFlashMessqge('success_message',"Listing created successfully");
 
@@ -139,7 +133,10 @@ class ListingController {
 
         $id = $params['id'] ?? '';
         $params = ['id' => $id];
-        $listing = $this->db->query('SELECT * FROM listings1 WHERE id = :id ', $params)->fetch();
+
+        global $modelJob;
+        $listing=$modelJob::readElement($this->db, $params);
+
         if(!$listing){
             ErrorController::notFound('Element not found with ID: '.$id);
             return;
@@ -150,7 +147,7 @@ class ListingController {
             return redirect("/listing/" .$id);
         }
 
-        $this->db->query('DELETE FROM listings1 WHERE id = :id ', $params);
+        $modelJob::deleteElement($this->db, $params);
 
         Session::setFlashMessqge('success_message',"Listing deleted successfully");
 
@@ -164,22 +161,15 @@ class ListingController {
 
         $params = ['id' => $id];
 
-        $listing = $this->db->query(
-            "SELECT * FROM listings1 WHERE id = :id "
-            ,$params
-        )->fetchAll();
-
-//inspect($listing);
+        global $modelJob;
+        $listing=$modelJob::readElement($this->db, $params);
 
         if(!$listing){
             ErrorController::notFound('Listing not found');
             return;
         }
 
-        global $modelJob;
-        $modelJob->setCurrentElement($listing[0]);
-
-//        inspectAndDie($listing[0]);
+        $modelJob->setCurrentElement($listing);
 
         loadView('listings/edit');
 
@@ -191,24 +181,22 @@ class ListingController {
 
         $params = ['id' => $id];
 
-        $listing = $this->db->query(
-            "SELECT * FROM listings1 WHERE id = :id "
-            ,$params
-        )->fetchAll();
+        global $modelJob;
+        $listing=$modelJob::readElement($this->db, $params);
 
         if(!$listing){
             ErrorController::notFound('Listing not found');
             return;
         }
 
-        if(!Permissions::updateJob($listing[0]->user_id)){
+        if(!Permissions::updateJob($listing->user_id)){
             Session::setFlashMessqge('error_message',"You can't update this listing");
             return redirect("/listing/" .$id);
         }
 
         //data for page
-        global $modelJob;
-        $modelJob->setCurrentElement($listing[0]);
+
+        $modelJob->setCurrentElement($listing);
 
         $allowedFields=ModelJobClass::$allowedFields;
 
@@ -249,11 +237,13 @@ class ListingController {
             }
 
             $updateFields=implode(',', $updateFields);
-
-            $query = "UPDATE listings1 SET ".$updateFields." WHERE id = :id";
-
             $updatedValues['id']=$id;
-            $this->db->query($query,$updatedValues);
+
+            $modelJob::updateElement(
+                $this->db
+                ,$updateFields
+                ,$updatedValues
+            );
 
             Session::setFlashMessqge('success_message','Listing updated successfully');
 
