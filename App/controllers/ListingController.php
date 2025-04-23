@@ -251,4 +251,39 @@ class ListingController {
             exit;
         }
     }
+
+    public function search() {
+//        inspectAndDie($_GET);
+        $keywords=isset($_GET['keywords']) ? trim($_GET['keywords']) : '';
+        $location=isset($_GET['location']) ? trim($_GET['location']) : '';
+
+        $query = " 
+            SELECT * FROM listings1 
+                WHERE ( 
+                        title LIKE :keywords
+                        OR  description LIKE :keywords
+                        OR  tags LIKE :keywords 
+                    )
+                    AND (
+                        state LIKE :location
+                        OR city LIKE :location
+                        OR address LIKE :location
+                    )                    
+          ";
+
+        $params=[
+            'keywords'=>'%'.$keywords.'%',
+            'location'=>'%'.$location.'%',
+        ];
+
+        $listings=$this->db->query($query,$params)->fetchAll();
+
+        global $modelJob;
+        $modelJob->setDataList($listings,$params);
+
+        loadView('listings/index');
+
+    }
+
+
 }

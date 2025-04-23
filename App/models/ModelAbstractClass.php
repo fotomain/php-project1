@@ -8,14 +8,16 @@ abstract class ModelAbstractClass {
     private $errorMessage = '';
     private $currentElement = null;
     private $dataList = null;
+    private $filters = null;
 
     public function __construct($dataList=null,$currentElement=null)
     {
         $this->currentElement = $currentElement;
         $this->dataList = $dataList;
     }
-    public function setDataList($dataList):mixed{
+    public function setDataList($dataList,$filters=null):mixed{
         $this->dataList = $dataList;
+        $this->filters = $filters;
         return $this;
     }
     public function getDataList(){
