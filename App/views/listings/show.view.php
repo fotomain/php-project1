@@ -25,7 +25,7 @@
                 <!-- Delete Form === start reload page-->
                 <form method="POST" >
                     <input type="hidden" name="_method" value="DELETE" />
-                    <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded">
+                    <button type="submit" class="px-4 py-2 bg-rose-100 hover:bg-red-600 text-white rounded">
                         Delete
                     </button>
                 </form>
