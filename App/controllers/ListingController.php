@@ -4,6 +4,7 @@ namespace App\controllers;
 
 use App\models\ModelJobClass;
 use Framework\Database;
+use Framework\Permissions;
 use Framework\Session;
 use Framework\Validation;
 
@@ -119,16 +120,13 @@ class ListingController {
                 $values[]=':'.$field;
             }
 
-//            inspect($values);
-//            inspect($newListingData);
-
             $values=implode(',', $values);
 
             $query = "INSERT INTO listings1 (".$fields.") VALUES (".$values.")";
 
-//            inspectAndDie($query);
-
             $this->db->query($query,$newListingData);
+
+            Session::setFlashMessqge('success_message',"Listing created successfully");
 
             redirect("/listings");
             exit;
@@ -147,14 +145,14 @@ class ListingController {
             return;
         }
 
-        if(Session::get('user')['id'] !== $listing->user_id){
-            $_SESSION['error_message']="You can't delete this listing";
+        if(!Permissions::deleteJob($listing->user_id)){
+            Session::setFlashMessqge('error_message',"You can't delete this listing");
             return redirect("/listing/" .$id);
         }
 
         $this->db->query('DELETE FROM listings1 WHERE id = :id ', $params);
 
-        $_SESSION['success_message'] = 'Listing deleted successfully';
+        Session::setFlashMessqge('success_message',"Listing deleted successfully");
 
         redirect("/listings");
 
@@ -190,7 +188,6 @@ class ListingController {
     public function update($params) {
 
         $id = $params['id'] ?? '';
-//inspect($id);
 
         $params = ['id' => $id];
 
@@ -199,11 +196,14 @@ class ListingController {
             ,$params
         )->fetchAll();
 
-//inspect($listing);
-
         if(!$listing){
             ErrorController::notFound('Listing not found');
             return;
+        }
+
+        if(!Permissions::updateJob($listing[0]->user_id)){
+            Session::setFlashMessqge('error_message',"You can't update this listing");
+            return redirect("/listing/" .$id);
         }
 
         //data for page
@@ -255,7 +255,7 @@ class ListingController {
             $updatedValues['id']=$id;
             $this->db->query($query,$updatedValues);
 
-            $_SESSION['success_message'] = 'Listing updated successfully';
+            Session::setFlashMessqge('success_message','Listing updated successfully');
 
             redirect("/listing/".$id);
             exit;

@@ -34,4 +34,15 @@ class Session {
         session_unset();
         session_destroy();
     }
+
+    public static function setFlashMessqge($key, $message) {
+        self::set($key,$message);
+    }
+    public static function getFlashMessqge($key,$default = null) {
+
+        $message = self::get('flash_' . $key, $default);
+        self::clear($key);
+        return $message;
+
+    }
 }
