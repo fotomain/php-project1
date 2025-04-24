@@ -20,6 +20,9 @@ abstract class ModelAbstractClass {
         $this->filters = $filters;
         return $this;
     }
+    public function getFilters():mixed{
+        return $this->filters;
+    }
     public function getDataList(){
         return $this->dataList;
     }

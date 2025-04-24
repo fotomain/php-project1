@@ -5,8 +5,21 @@
 
 <section>
     <div class="container mx-auto p-4 mt-4">
+
+        <?php global $modelJob; ?>
+
         <div class="text-center text-3xl mb-4 font-bold border border-gray-300 p-3">
-            All Jobs
+            <?php $filters = $modelJob->getFilters();?>
+            <?php if(empty($filters)): ?>
+                All Jobs
+            <?php else: ?>
+                <?php if(!empty($filters['keywords'])) : ?>
+                    <?php echo 'Keywords: '.str_replace('%','',$filters['keywords']) ?>
+                <?php endif; ?>
+                <?php if(!empty($filters['location'])) : ?>
+                    <?php echo 'Location: '.str_replace('%','',$filters['location']) ?>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>
 
         <?= loadPartial('message') ?>
@@ -14,8 +27,6 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
 
             <!-- Job Listing 1: -->
-            <?php global $modelJob; ?>
-
             <?php foreach($modelJob->getDataList() as $listing) : ?>
 
                 <div class="rounded-lg shadow-md bg-white">

@@ -47,7 +47,7 @@ class ModelJobClass extends ModelAbstractClass{
         return $result;
 
     }
-    public static function readElement($db=null,$params){
+    public static function readElement($db=null,$params=null){
 
         $result=$db->query(
         "SELECT * FROM listings1 WHERE id = :id "
@@ -62,7 +62,7 @@ class ModelJobClass extends ModelAbstractClass{
 
     }
 
-    public static function deleteElement($db=null,$params){
+    public static function deleteElement($db=null,$params=null){
 
         $db->query(
             'DELETE FROM listings1 WHERE id = :id '
@@ -70,7 +70,7 @@ class ModelJobClass extends ModelAbstractClass{
         );
 
     }
-    public static function updateElement($db=null,$updateFields,$updatedValues){
+    public static function updateElement($db=null,$updateFields=null,$updatedValues=null){
 
         $query = "UPDATE listings1 SET ".$updateFields." WHERE id = :id";
 
@@ -81,7 +81,7 @@ class ModelJobClass extends ModelAbstractClass{
 
     }
 
-    public static function createElement($db=null,$fieldsNames,$valuesNames,$newData){
+    public static function createElement($db=null,$fieldsNames=null,$valuesNames=null,$newData=null){
 
         $query = "INSERT INTO listings1 (".$fieldsNames.") VALUES (".$valuesNames.")";
 

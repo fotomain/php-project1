@@ -43,7 +43,6 @@ class ListingController {
         $params = ['id' => $id];
 
         global $modelJob;
-
         $listing=$modelJob::readElement($this->db, $params);
 
         if(!$listing){
