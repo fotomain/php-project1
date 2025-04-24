@@ -13,11 +13,12 @@
             <?php if(empty($filters)): ?>
                 All Jobs
             <?php else: ?>
+                <div>Search results for:</div>
                 <?php if(!empty($filters['keywords'])) : ?>
-                    <?php echo 'Keywords: '.str_replace('%','',$filters['keywords']) ?>
+                    <?php echo 'Keywords: '.htmlspecialchars(str_replace('%','',$filters['keywords']),  ENT_QUOTES, 'UTF-8'); ?>
                 <?php endif; ?>
                 <?php if(!empty($filters['location'])) : ?>
-                    <?php echo 'Location: '.str_replace('%','',$filters['location']) ?>
+                    <?php echo 'Location: '.htmlspecialchars(str_replace('%','',$filters['location']),  ENT_QUOTES, 'UTF-8'); ?>
                 <?php endif; ?>
             <?php endif; ?>
         </div>

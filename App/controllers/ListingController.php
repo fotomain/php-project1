@@ -252,7 +252,9 @@ class ListingController {
     }
 
     public function search() {
-//        inspectAndDie($_GET);
+
+        // test it ! <script> alert('WWW') </script>
+
         $keywords=isset($_GET['keywords']) ? trim($_GET['keywords']) : '';
         $location=isset($_GET['location']) ? trim($_GET['location']) : '';
 
