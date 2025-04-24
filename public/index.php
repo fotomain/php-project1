@@ -3,7 +3,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 require '../helpers.php';
 
-use Framework\Session; //auto call
+use Framework\Session;
 Session::start();
 
 use App\models\ModelErrorClass;
