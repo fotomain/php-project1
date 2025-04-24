@@ -37,14 +37,6 @@ class UserController extends \stdClass {
         global $modelUser;
         $modelUser->setCurrentElement($formState);
 
-
-//        if(null===$showData){
-//            $showData=new stdClass();
-//            $showData->email='';
-//            $showData->password='';
-//        }
-
-
         loadView('users/login');
     }
     public function create() {
@@ -53,7 +45,6 @@ class UserController extends \stdClass {
         $defalultDataCreate=ModelUserClass::$defalultDataCreate;
         $defalultDataCreate=json_decode(json_encode($defalultDataCreate));
         $modelUser->setCurrentElement($defalultDataCreate);
-//        inspectAndDie($modelUser);
 
         loadView('users/create');
     }
@@ -163,7 +154,7 @@ class UserController extends \stdClass {
 
     function authenticate()
     {
-//        inspectAndDie("authenticate1");
+
         $email=$_POST['email'];
         $password=$_POST['password'];
         $errors=[];
@@ -176,8 +167,6 @@ class UserController extends \stdClass {
 
         $email=$_POST['email'];
         $password=$_POST['password'];
-
-//        inspectAndDie($email);
 
         $formState = [
             "email"=>$email,

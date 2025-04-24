@@ -80,7 +80,6 @@ class ListingController {
         }
 
         $modelJob->setCurrentElement(json_decode(json_encode($newListingData)));
-//        inspect($modelJob->getCurrentElement());
 
         if(!empty($errors)) {
             //Reload THIS vies with errors
@@ -156,7 +155,6 @@ class ListingController {
 
     public function edit($params) {
         $id = $params['id'] ?? '';
-//inspect($id);
 
         $params = ['id' => $id];
 
@@ -213,8 +211,6 @@ class ListingController {
             }
         }
 
-//        inspectAndDie($errors);
-
         if(!empty($errors)) {
             //Reload THIS vies with errors
             $err = new \stdClass();
@@ -227,8 +223,6 @@ class ListingController {
             loadView('listings/edit');
             exit;
         } else {
-//            echo '$updatedValues';
-//            inspectAndDie($updatedValues);
 
             $updateFields=[];
             foreach (array_keys($updatedValues) as $field) {

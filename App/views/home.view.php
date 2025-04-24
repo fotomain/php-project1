@@ -4,9 +4,6 @@
 <?php loadPartial('showcase-search'); ?>
 <?php loadPartial('top-banner'); ?>
 
-<?php //global $listingsArray;inspect($listingsArray); ?>
-
-
 <!-- Job Listings -->
 <section>
     <div class="container mx-auto p-4 mt-4">

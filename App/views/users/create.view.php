@@ -10,7 +10,6 @@
         <?= loadPartial('errors') ?>
 
         <?php global $modelUser; $showData=$modelUser->getCurrentElement()?>
-<!--        --><?php //echo inspectAndDie($modelUser)?>
 
         <form method="POST" action="/auth/register">
             <div class="mb-4">

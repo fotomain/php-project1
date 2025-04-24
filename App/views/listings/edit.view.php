@@ -28,10 +28,6 @@
                 <?php endforeach; ?>
             <?php endif; ?>
 
-<!--            <div>inspect-showData</div>-->
-<!--            <div>--><?php //inspect($showData->title); ?><!--</div>-->
-<!--            <div>--><?php //inspect($showData); ?><!--</div>-->
-
             <div class="mb-4">
                 <input
                     type="text"

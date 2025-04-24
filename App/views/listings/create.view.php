@@ -18,10 +18,6 @@
 
             <?php global $modelJob; $showData=$modelJob->getCurrentElement()?>
 
-<!--            <div>inspect-showData</div>-->
-<!--            <div>--><?php //inspect($showData->title); ?><!--</div>-->
-<!--            <div>--><?php //inspect($showData); ?><!--</div>-->
-
             <div class="mb-4">
                 <input
                     type="text"

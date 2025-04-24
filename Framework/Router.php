@@ -93,8 +93,6 @@ class Router
                     }
                 }
 
-//                inspect($params);
-
                 if ($match) {
                     // go normal run
                     foreach ($route['middleware'] as $middleware) {

@@ -1,8 +1,6 @@
 <?php
 
 
-//inspectAndDie(session_status()); //0-disabled 1-no seddio 2-started
-
 function basePath($path='')
 {
     return __DIR__.'/'.$path;
@@ -13,8 +11,6 @@ function loadView($name='', $data=[])
     $path = basePath("App/views/{$name}.view.php");
 
     if(file_exists($path)){
-//        extract($data); //!!! $listings as variable
-//        echo inspect($data);
         require $path;
     } else {
         echo "Error! View '{$path}' not found";

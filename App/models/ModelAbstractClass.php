@@ -27,7 +27,6 @@ abstract class ModelAbstractClass {
         return $this->dataList;
     }
     public function setCurrentElement($currentElement):mixed{
-//        inspectAndDie($currentElement);
         $this->currentElement = $currentElement;
         return $this;
     }
@@ -41,7 +40,6 @@ abstract class ModelAbstractClass {
     }
 
     public function getErrorMessage():mixed{
-//        inspect($this->errorMessage);
         return $this->errorMessage;
     }
 
